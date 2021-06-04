@@ -1,0 +1,26 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+    <span *ngFor="let child of items; let i = index">
+        <!-- Handle branch node menu items -->
+        <span *ngIf="child.children && child.children.length > 0">
+            <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu">
+                {{child.label}}
+            </button>
+            <app-menu-item #menu [items]="child.children" (onItemSelected)="itemSelected($event)"></app-menu-item>
+        </span>
+        <!-- Handle leaf node menu items -->
+        <span *ngIf="!child.children || child.children.length === 0" class="d-flex align-items-center">
+            <button mat-menu-item (click)="itemSelected(child, $event)">
+                {{child.label}}
+            </button>
+            <span 
+                *ngIf="child.canDelete"
+                class="material-icons-outlined red pointer pr-2"
+                (click)="deleteItem(child, i, $event)"
+                matTooltip="Elimina el valor del catálogo y de la condición"
+            >
+                remove_circle
+            </span>
+        </span>
+    </span>
+</mat-menu>
+  

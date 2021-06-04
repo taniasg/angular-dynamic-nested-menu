@@ -1,0 +1,52 @@
+<div>
+	<span *ngFor="let item of _items">
+		<!-- Handle branch node buttons here -->
+		<span *ngIf="item.children && item.children.length > 0; else noItems">
+			<h5 class="pb-2">{{ item.label }}</h5>
+			<div style="width: 100%;">
+				<mat-form-field 
+					style="height: 50px;"
+					[ngStyle]="{'width': item.showButton ? '90%' : '100%'}"
+					appearance="outline"
+					[matMenuTriggerFor]="menu.childMenu">
+					<mat-select [placeholder]="item.placeholder"></mat-select>
+				</mat-form-field>
+				<span 
+					*ngIf="item.showButton"
+					class="material-icons-outlined orange fs-24 pointer" 
+					style="width: 10%; text-align:center;"
+					(click)="addItem()"
+					matTooltip="Agregar variable"
+				>
+					add_circle
+				</span>
+				
+			</div>
+			
+			<app-menu-item #menu [items]="item.children" (onItemSelected)="itemSelected($event)" (onDeleteItem)="deleteItem($event)"></app-menu-item>
+		</span>
+		<!-- Leaf node buttons here -->
+		<ng-template #noItems>
+			<h5 class="pb-2">{{ item.label }}</h5>
+			<div style="width: 100%;">
+				<mat-form-field 
+					[ngStyle]="{'width': item.showButton ? '90%' : '100%'}"
+					style="height: 50px;"
+					appearance="outline">
+					<mat-select [placeholder]="item.placeholder"></mat-select>
+				</mat-form-field>
+				<span 
+					*ngIf="item.showButton"
+					class="material-icons-outlined orange fs-24 pointer" 
+					style="width: 10%; text-align:center;"
+					(click)="addItem()"
+					matTooltip="Agregar valor"
+				>
+					add_circle
+				</span>
+			</div>
+			
+		</ng-template>
+	</span>
+	
+</div>

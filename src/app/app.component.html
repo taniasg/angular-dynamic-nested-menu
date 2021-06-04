@@ -1,0 +1,29 @@
+
+
+<div class="row row-form px-2 pt-4 m-2">
+    <!-- Operadores -->
+    <app-dynamic-nested-menu
+        class="form-group col-md-4 col-sm-12"
+        [items]="catalogos.operadores"
+        (onItemSelected)="itemSelected($event)"
+    >
+    </app-dynamic-nested-menu>
+
+    <!-- Valores -->
+    <!-- <app-dynamic-nested-menu
+    class="form-group col-md-4 col-sm-12"
+    [items]="catalogos.valores"
+    (onItemSelected)="itemSelected($event)"
+    (onAddItem)="createVariable()"
+    (onDeleteItem)="deleteVariable($event)"
+    >
+    </app-dynamic-nested-menu> -->
+
+    <!-- Campos -->
+    <app-dynamic-nested-menu
+        class="form-group col-md-4 col-sm-12"
+        [items]="catalogos.campos"
+        (onItemSelected)="itemSelected($event)"
+    >
+    </app-dynamic-nested-menu>
+</div>
